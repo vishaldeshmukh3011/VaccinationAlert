@@ -2,7 +2,7 @@ let nodemailer = require('nodemailer');
 const moment = require('moment');
 const cron = require('node-cron');
 const axios = require('axios');
-const {daysToCheck, AGE, PINCODE} = require("./constants");
+const {daysToCheck, AGE, PINCODE, email, password} = require("./constants");
 const URL = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin"
 async function check() {
     try {
@@ -66,13 +66,13 @@ function sendEmail(validSlots, date, callback){
     let nodemailerTransporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: String('vishal5167@gmail.com'),
-            pass: String('V@cognizant05')
+            user: email
+            pass: password
         }
     });
     let options = {
         from: String('Vaccine Checker ' + ""),
-        to: "vishal5167@gmail.com",
+        to: email
         subject: "Vaccination Alert",
         html: message
     };
